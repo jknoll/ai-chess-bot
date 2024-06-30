@@ -1,3 +1,6 @@
+# Training datasets from lichess
+*.zst
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
