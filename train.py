@@ -98,7 +98,7 @@ configs = [
 
 print(pl.__version__)
 for config in configs:
-  version_name = f'{int(time.time())}-batch_size-{config["batch_size"]}-layer_count-{config["layer_count"]}-learning_rate-{config["learning-rate"]}'
+  version_name = f'{int(time.time())}-batch_size-{config["batch_size"]}-layer_count-{config["layer_count"]}-learning_rate-{config["learning_rate"]}'
   logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name)
   trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=logger)
   model = EvaluationModel(layer_count=config["layer_count"],batch_size=config["batch_size"],learning_rate=config["learning_rate"])
