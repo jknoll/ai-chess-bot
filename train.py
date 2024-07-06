@@ -1,10 +1,3 @@
-#!pip install peewee pytorch-lightning
-#!wget https://storage.googleapis.com/chesspic/datasets/2021-07-31-lichess-evaluations-37MM.db.gz
-#!gzip -d "2021-07-31-lichess-evaluations-37MM.db.gz"
-#!rm "2021-07-31-lichess-evaluations-37MM.db.gz"
-
-####
-
 from peewee import *
 import base64
 from config import LABEL_COUNT
@@ -23,23 +16,11 @@ class Evaluations(Model):
   def binary_base64(self):
     return base64.b64encode(self.binary)
 db.connect()
-<<<<<<< HEAD
-print(config.LABEL_COUNT)
+print(LABEL_COUNT)
 eval = Evaluations.get(Evaluations.id == 1)
 print(eval.binary_base64())
 print(eval.fen)
 print(eval.eval)
-=======
-# Full Dataset
-# LABEL_COUNT = 37164639
-# Subset for Hyperparameter Sweep
-LABEL_COUNT = 10000000
-print(LABEL_COUNT)
-# eval = Evaluations.get(Evaluations.id == 1)
-# print(eval.binary_base64())
-# print(eval.fen)
-# print(eval.eval)
->>>>>>> 078bada211a575024d96df53c2ad4a079ad9fe07
 
 ####
 
