@@ -1,21 +1,6 @@
-from peewee import *
-import base64
 from config import LABEL_COUNT
+from models import Evaluations
 
-db = SqliteDatabase('2021-07-31-lichess-evaluations-37MM.db')
-
-class Evaluations(Model):
-  id = IntegerField()
-  fen = TextField()
-  binary = BlobField()
-  eval = FloatField()
-
-  class Meta:
-    database = db
-
-  def binary_base64(self):
-    return base64.b64encode(self.binary)
-db.connect()
 print(LABEL_COUNT)
 eval = Evaluations.get(Evaluations.id == 1)
 print(eval.binary_base64())
@@ -28,30 +13,8 @@ import torch
 import numpy as np
 from torch import nn
 import torch.nn.functional as F
-from torch.utils.data import DataLoader, IterableDataset
 import pytorch_lightning as pl
-from random import randrange
-
-class EvaluationDataset(IterableDataset):
-  def __init__(self, count):
-    self.count = count
-  def __iter__(self):
-    return self
-  def __next__(self):
-    idx = randrange(self.count)
-    return self[idx]
-  def __len__(self):
-    return self.count
-  def __getitem__(self, idx):
-    eval = Evaluations.get(Evaluations.id == idx+1)
-    bin = np.frombuffer(eval.binary, dtype=np.uint8)
-    bin = np.unpackbits(bin, axis=0).astype(np.single) 
-    eval.eval = max(eval.eval, -15)
-    eval.eval = min(eval.eval, 15)
-    ev = np.array([eval.eval]).astype(np.single) 
-    return {'binary':bin, 'eval':ev}    
-
-dataset = EvaluationDataset(count=LABEL_COUNT)
+from pytorchdatasets import EvalationDataSet, dataset
 
 import time
 from collections import OrderedDict
