@@ -1,6 +1,7 @@
 from IPython.display import display, SVG
 from random import randrange
 from config import LABEL_COUNT
+from models import Evaluations
 
 SVG_BASE_URL = "https://us-central1-spearsx.cloudfunctions.net/chesspic-fen-image/" 
 
