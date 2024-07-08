@@ -1,6 +1,10 @@
 # Training datasets from lichess
 *.zst
+*.db
+
+#Log output
 lightning_logs/
+tensorboard-logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
