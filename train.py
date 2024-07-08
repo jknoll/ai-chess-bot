@@ -50,6 +50,7 @@ class EvaluationModel(pl.LightningModule):
     # multiple epochs to generate interesting graphs.
     for name, param in self.named_parameters():
       self.logger.experiment.add_histogram(name, param, self.current_epoch)
+      self.logger.experiment.add_histogram(f'{name}_grad', param.grad, self.current_epoch)
       # print(name + ": " + str(param) + ": " + str(self.current_epoch))
 
   def configure_optimizers(self):
@@ -61,7 +62,7 @@ class EvaluationModel(pl.LightningModule):
 
 # Originally 4, 512, 1e-3
 configs = [
-           {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-3, "max_epochs": 5},
+           {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-3, "max_epochs": 10},
 
 #          {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-3, "max_epochs": 1},
 #          {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-4, "max_epochs": 1},      
