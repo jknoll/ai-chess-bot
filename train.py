@@ -1,4 +1,4 @@
-from config import LABEL_COUNT
+from config import *
 from database_models import Evaluations
 
 print(LABEL_COUNT)
@@ -59,18 +59,6 @@ class EvaluationModel(pl.LightningModule):
   def train_dataloader(self):
     dataset = EvaluationDataset(count=LABEL_COUNT)
     return DataLoader(dataset, batch_size=self.batch_size, num_workers=2, pin_memory=True)
-
-# Originally 4, 512, 1e-3
-configs = [
-           {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-3, "max_epochs": 1}
-
-#          {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-3, "max_epochs": 1},
-#          {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-4, "max_epochs": 1},      
-#          {"layer_count": 6, "batch_size": 256, "learning_rate": 1e-2, "max_epochs": 1},
-#          {"layer_count": 6, "batch_size": 256, "learning_rate": 1e-3, "max_epochs": 1},
-#          {"layer_count": 6, "batch_size": 256, "learning_rate": 1e-4, "max_epochs": 1},
-
-           ]
 
 print(pl.__version__)
 for config in configs:
