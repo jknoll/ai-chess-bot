@@ -1,5 +1,5 @@
 # LABEL_COUNT = 37164639 # TODO: this should be read from the .db file, not hardcoded.
-LABEL_COUNT = 100000
+LABEL_COUNT = 10000
 
 LOG_TENSORBOARD = True
 LOG_WANDB = True
