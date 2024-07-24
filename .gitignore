@@ -5,6 +5,7 @@
 #Log output
 lightning_logs/
 tensorboard-logs/
+wandb/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
