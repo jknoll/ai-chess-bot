@@ -45,13 +45,14 @@ class EvaluationModel(pl.LightningModule):
 
     return loss
 
-  def on_after_backward(self):
-    # This may be slowing training. TensorBoard histograms and distributions require
-    # multiple epochs to generate interesting graphs.
-    for name, param in self.named_parameters():
-      self.logger.experiment.add_histogram(name, param, self.current_epoch)
-      self.logger.experiment.add_histogram(f'{name}_grad', param.grad, self.current_epoch)
-      # print(name + ": " + str(param) + ": " + str(self.current_epoch))
+  if (ENABLE_LOGGING):
+    def on_after_backward(self):
+      # This may be slowing training. TensorBoard histograms and distributions require
+      # multiple epochs to generate interesting graphs.
+      for name, param in self.named_parameters():
+        self.logger.experiment.add_histogram(name, param, self.current_epoch)
+        self.logger.experiment.add_histogram(f'{name}_grad', param.grad, self.current_epoch)
+        # print(name + ": " + str(param) + ": " + str(self.current_epoch))
 
   def configure_optimizers(self):
     return torch.optim.Adam(self.parameters(), lr=self.learning_rate)
@@ -63,9 +64,12 @@ class EvaluationModel(pl.LightningModule):
 print(pl.__version__)
 for config in configs:
   version_name = f'{int(time.time())}-batch_size-{config["batch_size"]}-layer_count-{config["layer_count"]}-learning_rate-{config["learning_rate"]}'
-  tensorboard_logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name, log_graph=True)
-  wandb_logger = pl.loggers.WandbLogger(project="chessml")
-  trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=[tensorboard_logger, wandb_logger])
+  if (ENABLE_LOGGING):
+    tensorboard_logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name, log_graph=True)
+    wandb_logger = pl.loggers.WandbLogger(project="chessml")
+    trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=[tensorboard_logger, wandb_logger], log_every_n_steps=LOG_FREQUENCY)
+  else:
+    trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"])
   model = EvaluationModel(layer_count=config["layer_count"],batch_size=config["batch_size"],learning_rate=config["learning_rate"])
 
   # block commented out previously; appears to be for adaptive learning rate behavior, but the API has changed.
