@@ -67,7 +67,7 @@ for config in configs:
   if (ENABLE_LOGGING):
     tensorboard_logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name, log_graph=True)
     wandb_logger = pl.loggers.WandbLogger(project="chessml")
-    trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=[tensorboard_logger, wandb_logger], log_every_n_steps=LOG_FREQUENCY)
+    trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=[tensorboard_logger, wandb_logger], log_every_n_steps=LOG_FREQUENCY, profiler="simple")
   else:
     trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"])
   model = EvaluationModel(layer_count=config["layer_count"],batch_size=config["batch_size"],learning_rate=config["learning_rate"])
