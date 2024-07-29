@@ -1,5 +1,5 @@
-# LABEL_COUNT = 37164639 # TODO: this should be read from the db, not hardcoded.
-LABEL_COUNT = 10000000
+LABEL_COUNT = 37164639 # TODO: this should be read from the db, not hardcoded.
+# LABEL_COUNT = 1000000
 
 # With logging, one full 37M Epoch ETA is 6h15m:
 # Epoch 0:   0%|                                    | 61/72588 [00:18<6:15:56,  3.22it/s, v_num=13k0]
