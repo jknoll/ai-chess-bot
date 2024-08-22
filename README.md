@@ -20,8 +20,7 @@ There are a configurable number (tested from 4-8) of hidden layers with ReLU act
 The output layer consists of a single floating point output element which represents the model's estimated evaluation for the given input position.
 
 ### Model
-![Model](img/model.png)
-<img src="img/model.png" width="200" height="100">
+<img src="img/model.png" width="210" height="300">
 
 ## Training Results
 An initial hyperparameter sweep was used to determine optimal hyperparameters. Batch size was was initially determined to have little effect on the rate of improvement, so it was fixed at 512. The sweep was then conducted to find optimal values for network layer count and learning rate. The sweep results were visualized using TensorBoard.
