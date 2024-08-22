@@ -21,6 +21,7 @@ The output layer consists of a single floating point output element which repres
 
 ### Model
 ![Model](img/model.png)
+<img src="img/model.png" width="200" height="100">
 
 ## Training Results
 An initial hyperparameter sweep was used to determine optimal hyperparameters. Batch size was was initially determined to have little effect on the rate of improvement, so it was fixed at 512. The sweep was then conducted to find optimal values for network layer count and learning rate. The sweep results were visualized using TensorBoard.
