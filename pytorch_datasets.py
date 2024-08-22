@@ -1,6 +1,11 @@
-from torch.utils.data import DataLoader, IterableDataset
+# Defines the position evaluation dataset used by the PyTorch Lightning model for training. 
+
+from torch.utils.data import IterableDataset
 from random import randrange
 from config import LABEL_COUNT
+from database_models import Evaluations
+import numpy as np
+
 
 class EvaluationDataset(IterableDataset):
   def __init__(self, count):

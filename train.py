@@ -1,5 +1,5 @@
-from config import LABEL_COUNT
-from models import Evaluations
+from config import *
+from database_models import Evaluations
 
 print(LABEL_COUNT)
 eval = Evaluations.get(Evaluations.id == 1)
@@ -10,11 +10,11 @@ print(eval.eval)
 ####
 
 import torch
-import numpy as np
 from torch import nn
 import torch.nn.functional as F
+from torch.utils.data import DataLoader
 import pytorch_lightning as pl
-from pytorchdatasets import EvalationDataSet, dataset
+from pytorch_datasets import EvaluationDataset, dataset
 
 import time
 from collections import OrderedDict
@@ -31,6 +31,9 @@ class EvaluationModel(pl.LightningModule):
     layers.append((f"linear-{layer_count-1}", nn.Linear(808, 1)))
     self.seq = nn.Sequential(OrderedDict(layers))
 
+    # Required property for logging the model graph to TensorBoard
+    self.example_input_array = torch.zeros(808)
+
   def forward(self, x):
     return self.seq(x)
 
@@ -39,7 +42,17 @@ class EvaluationModel(pl.LightningModule):
     y_hat = self(x)
     loss = F.l1_loss(y_hat, y)
     self.log("train_loss", loss)
+
     return loss
+
+  if (ENABLE_LOGGING):
+    def on_after_backward(self):
+      # This may be slowing training. TensorBoard histograms and distributions require
+      # multiple epochs to generate interesting graphs.
+      for name, param in self.named_parameters():
+        self.logger.experiment.add_histogram(name, param, self.current_epoch)
+        self.logger.experiment.add_histogram(f'{name}_grad', param.grad, self.current_epoch)
+        # print(name + ": " + str(param) + ": " + str(self.current_epoch))
 
   def configure_optimizers(self):
     return torch.optim.Adam(self.parameters(), lr=self.learning_rate)
@@ -48,23 +61,17 @@ class EvaluationModel(pl.LightningModule):
     dataset = EvaluationDataset(count=LABEL_COUNT)
     return DataLoader(dataset, batch_size=self.batch_size, num_workers=2, pin_memory=True)
 
-# Originally 4, 512, 1e-3
-configs = [
-           {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-2, "max_epochs": 1},
-           {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-3, "max_epochs": 1},
-           {"layer_count": 4, "batch_size": 256, "learning_rate": 1e-4, "max_epochs": 1},      
-           {"layer_count": 6, "batch_size": 256, "learning_rate": 1e-2, "max_epochs": 1},
-           {"layer_count": 6, "batch_size": 256, "learning_rate": 1e-3, "max_epochs": 1},
-           {"layer_count": 6, "batch_size": 256, "learning_rate": 1e-4, "max_epochs": 1},
-          #  {"layer_count": 6, "batch_size": 1024},
-           ]
-
 print(pl.__version__)
 for config in configs:
-  version_name = f'{int(time.time())}-batch_size-{config["batch_size"]}-layer_count-{config["layer_count"]}-learning_rate-{config["learning-rate"]}'
-  logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name)
-  trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=logger)
+  version_name = f'{int(time.time())}-batch_size-{config["batch_size"]}-layer_count-{config["layer_count"]}-learning_rate-{config["learning_rate"]}'
+  if (ENABLE_LOGGING):
+    tensorboard_logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name, log_graph=True)
+    wandb_logger = pl.loggers.WandbLogger(project="chessml")
+    trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=[tensorboard_logger, wandb_logger], log_every_n_steps=LOG_FREQUENCY, profiler="simple")
+  else:
+    trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"])
   model = EvaluationModel(layer_count=config["layer_count"],batch_size=config["batch_size"],learning_rate=config["learning_rate"])
+
   # block commented out previously; appears to be for adaptive learning rate behavior, but the API has changed.
   #trainer.tune(model)
   #lr_finder = trainer.tuner.lr_find(model, min_lr=1e-6, max_lr=1e-3, num_training=25)
