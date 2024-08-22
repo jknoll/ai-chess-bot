@@ -29,6 +29,8 @@ An initial hyperparameter sweep was used to determine optimal hyperparameters. B
 ![HyperparameterSweep](img/sweep.png)
 
 ### Multi Epoch Training Run 
-With a batch size of 512, a layer count of 4, and a learning rate of 0.001, a 725k step run resulted in an end of run loss value 0f 1.3405.
+With a batch size of 512, a layer count of 4, and a learning rate of 0.001, a 725k step run resulted in an end of run loss value of 1.3405.
 
 ![Multi Epoch Training Run](img/loss.png)
+
+Code derived from the Towards Data Science blog post [Train Your Own Chess AI](https://towardsdatascience.com/train-your-own-chess-ai-66b9ca8d71e4).
