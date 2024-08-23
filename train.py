@@ -1,13 +1,7 @@
 from config import *
 from database_models import Evaluations
 
-print(LABEL_COUNT)
-eval = Evaluations.get(Evaluations.id == 1)
-print(eval.binary_base64())
-print(eval.fen)
-print(eval.eval)
-
-####
+print("Training from " + str(LABEL_COUNT) + " examples.")
 
 import torch
 from torch import nn
@@ -33,6 +27,7 @@ class EvaluationModel(pl.LightningModule):
 
     # Logging
     self.save_hyperparameters()
+
     # Required property for logging the model graph to TensorBoard
     self.example_input_array = torch.zeros(808)
 
@@ -74,16 +69,12 @@ for config in configs:
     tensorboard_logger = pl.loggers.TensorBoardLogger("lightning_logs", name="chessml", version=version_name, log_graph=True)
     wandb_logger = pl.loggers.WandbLogger(project="chessml", log_model=True)
 
-
     trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"],logger=[tensorboard_logger, wandb_logger], log_every_n_steps=LOG_FREQUENCY, profiler="simple")
   else:
     trainer = pl.Trainer(num_nodes=1,precision=16,max_epochs=config["max_epochs"])
   model = EvaluationModel(layer_count=config["layer_count"],batch_size=config["batch_size"],learning_rate=config["learning_rate"])
   if (ENABLE_LOGGING):
+    # See: https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.loggers.wandb.html
     wandb_logger.watch(model, log="all", log_freq=500)
-  # block commented out previously; appears to be for adaptive learning rate behavior, but the API has changed.
-  #trainer.tune(model)
-  #lr_finder = trainer.tuner.lr_find(model, min_lr=1e-6, max_lr=1e-3, num_training=25)
-  #fig = lr_finder.plot(suggest=True)
-  #fig.show()
+
   trainer.fit(model)
