@@ -35,8 +35,20 @@ FIT Profiler Report
 After adding a training/validation/test split, validation_loss indicates that when training with 10M of the 37M original labeled examples, validation_loss starts to increase around epoch five, indicating overtraining. Training with the full 37M would help, but I suspect we might eventually hit another overfitting threshhold and that more data would be helpful.
 
 Plan to add data:
-1) Download another lichess .pgn.zst archive. Complete
+1) Download a new lichess .pgn.zst archive. Complete
 2) Download the original reference (July 2021) .pgn.zst archive.
 3) Create a PGN => [(FEN, eval)...] parser which works on the lines containing the Stockfish eval. Complete
-4) Pull the first eval-containing line from the original (July 2021) .pgn.zst. and parse it as in step 3, comparing to the first record in the sqllite database.
-5) Add the FEN => bitboard binary representation to the parser from step 3.
+4) Pull the first eval-containing line from the original (July 2021) .pgn.zst. and parse it as in step 3, comparing to the first record(s) in the sqllite database. Complete: but the first eval-contining line in the July 2021 .pgn.zst is not the same as the first line in the database. Furthermore, all of the FEN I am generating with my parser is omitting the "en-passant eligible" FEN field.
+
+5) Add the FEN => bitboard binary representation to the parser from step 3. See https://chess.stackexchange.com/questions/29294/quickly-converting-board-to-bitboard-representation-using-python-chess-library
+
+Open question: the evals in the lichess files sometimes indicate e.g. "mate in five", but the maximum evals in the sqlite database is 152.65
+
+```
+sqlite> select * from evaluations ORDER BY eval DESC limit 100;
+
+45047|5R2/2K5/8/8/4k3/8/8/8 b - - 68 99||152.65
+191443|8/8/8/4p3/1K5P/6P1/6N1/5k2 w - - 0 57||152.65
+622203|8/8/6Kp/pk1Q2p1/1p4P1/7P/8/8 b - - 3 53||152.65
+```
+
