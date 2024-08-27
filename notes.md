@@ -38,7 +38,7 @@ Plan to add data:
 1) Download a new lichess .pgn.zst archive. Complete
 2) Download the original reference (July 2021) .pgn.zst archive.
 3) Create a PGN => [(FEN, eval)...] parser which works on the lines containing the Stockfish eval. Complete
-4) Pull the first eval-containing line from the original (July 2021) .pgn.zst. and parse it as in step 3, comparing to the first record(s) in the sqllite database. Complete: but the first eval-contining line in the July 2021 .pgn.zst is not the same as the first line in the database. Furthermore, all of the FEN I am generating with my parser is omitting the "en-passant eligible" FEN field.
+4) Pull the first eval-containing line from the original (July 2021) .pgn.zst. and parse it as in step 3, comparing to the first record(s) in the sqllite database. Complete: but the first eval-contining line in the July 2021 .pgn.zst is not the same as the first line in the database. Furthermore, all of the FEN I am generating with my parser is omitting the "en-passant eligible" FEN field. This is a design decision captured in this issue thread: https://github.com/niklasf/python-chess/issues/66
 
 5) Add the FEN => bitboard binary representation to the parser from step 3. See https://chess.stackexchange.com/questions/29294/quickly-converting-board-to-bitboard-representation-using-python-chess-library
 

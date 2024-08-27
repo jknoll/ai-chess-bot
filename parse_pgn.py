@@ -18,9 +18,12 @@ for node in game.mainline():
     move = node.move
     eval = node.eval()
     if eval:
-       eval = eval.white()
+       score = eval.white().score()
+       if score:
+           score = score/100.0
 
     board.push(move)
-    fen_list.append((board.fen(), eval))
+    fen_list.append((board.fen(), score))
+    
 for position in fen_list:
   print(position)
