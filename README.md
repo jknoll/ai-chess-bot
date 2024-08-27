@@ -5,6 +5,20 @@ Project to apply a deep neural network to learn a chess position evaluation func
 
 Only the evaluation function learning component is currently implemented in this repository. Move generation and move selection, possibly including minimax, alpha beta pruning, etc. would be necessary to complete a playable bot for live chess.
 
+## Getting Started
+### Prerequisites
+
+Install [Python3](https://www.python.org/downloads/) 
+
+Install [PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/) (conda recommended)
+
+Modify `layer_count`, `batch_size`, `learning_rate`, `max_epochs` etc. in `config.py`
+
+Train the model:
+`$ python3 train.py`
+
+You may be prompted to enter account information related to [Weights and Biases](https://wandb.ai/site) model training analytics. Sign up for a free account or skip this step, as it's not required for model training or inference.
+
 ## Training Method
 
 The network is trained on a [Lichess Standard Chess open database files](https://database.lichess.org/) which represent games in [Portable Game Notion](https://en.wikipedia.org/wiki/Portable_Game_Notation) and some proportion of them include the traditional Stockfish chess engine's evaluation, showing white or black's advantage in centipawns for the given position.
@@ -33,4 +47,4 @@ With a batch size of 512, a layer count of 4, and a learning rate of 0.001, a 72
 
 ![Multi Epoch Training Run](img/loss.png)
 
-Code derived from the Towards Data Science blog post [Train Your Own Chess AI](https://towardsdatascience.com/train-your-own-chess-ai-66b9ca8d71e4).
+Project derived from the Towards Data Science blog post [Train Your Own Chess AI](https://towardsdatascience.com/train-your-own-chess-ai-66b9ca8d71e4).
