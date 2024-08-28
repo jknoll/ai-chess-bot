@@ -36,7 +36,6 @@ class SplitEvaluationDataset(IterableDataset):
       # Original return value
       # return {'binary':bin, 'eval':ev}    
       
-
 # Docs for training, validation, test split implementation
 # https://lightning.ai/docs/pytorch/stable/common/evaluation_basic.html
 
