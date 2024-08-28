@@ -1,5 +1,5 @@
 # LABEL_COUNT = 37164639 # TODO: this should be read from the db, not hardcoded.
-LABEL_COUNT = 1000
+LABEL_COUNT   = 10000000
 
 # With logging, one full 37M Epoch ETA is 6h15m:
 # Epoch 0:   0%|                                    | 61/72588 [00:18<6:15:56,  3.22it/s, v_num=13k0]
@@ -13,7 +13,7 @@ ENABLE_LOGGING = True
 # It seems that a "step" in every_n_steps means running one batch.
 LOG_FREQUENCY = 500 
 configs = [
-          {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-3, "max_epochs": 1}
+          {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-3, "max_epochs": 10}
 
 #          {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-2, "max_epochs": 10},
 #          {"layer_count": 4, "batch_size": 512, "learning_rate": 1e-3, "max_epochs": 10},

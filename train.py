@@ -8,7 +8,7 @@ from torch import nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import pytorch_lightning as pl
-from pytorch_datasets import EvaluationDataset, dataset
+from pytorch_datasets import train_dataset, val_dataset, test_dataset
 
 import time
 from collections import OrderedDict
@@ -39,11 +39,26 @@ class EvaluationModel(pl.LightningModule):
     y_hat = self(x)
     loss = F.l1_loss(y_hat, y)
     self.log("train_loss", loss)
+
+# This may be necessary for logging gradients, but could incur a performance penalty. Or it
+# may be rendered moot by the grad logging lines in def on_after_backward() below.
 #    for name, param in self.named_parameters():
 #      self.logger.experiment.add_histogram(name, param, self.current_epoch)
 #      self.logger.experiment.add_histogram(f'{name}_grad', param.grad, self.current_epoch)
 
     return loss
+
+  def test_step(self, batch, batch_idx):
+    x, y = batch['binary'], batch['eval']
+    y_hat = self(x)
+    loss = F.l1_loss(y_hat, y)
+    self.log("test_loss", loss)
+  
+  def validation_step(self, batch, batch_idx):
+    x, y = batch['binary'], batch['eval']
+    y_hat = self(x)
+    loss = F.l1_loss(y_hat, y)
+    self.log("validation_loss", loss)
 
   # if (ENABLE_LOGGING):
   if (False):
@@ -59,8 +74,13 @@ class EvaluationModel(pl.LightningModule):
     return torch.optim.Adam(self.parameters(), lr=self.learning_rate)
 
   def train_dataloader(self):
-    dataset = EvaluationDataset(count=LABEL_COUNT)
-    return DataLoader(dataset, batch_size=self.batch_size, num_workers=2, pin_memory=True)
+    return DataLoader(train_dataset, batch_size=self.batch_size, num_workers=2, pin_memory=True)
+  
+  def validation_dataloader(self):
+    return DataLoader(val_dataset, batch_size=self.batch_size, num_workers=2, pin_memory=True)
+
+  def test_dataloader(self):
+    return DataLoader(test_dataset, batch_size=self.batch_size, num_workers=2, pin_memory=True)
 
 print(pl.__version__)
 for config in configs:
@@ -77,4 +97,6 @@ for config in configs:
     # See: https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.loggers.wandb.html
     wandb_logger.watch(model, log="all", log_freq=500)
 
-  trainer.fit(model)
+  # The model's train_dataloader() seems to be called implicitly if not passed below, but the presence
+  # of the validation_dataloader() argument seems necessary to invoke calls to the models' validation_step function.
+  trainer.fit(model, model.train_dataloader(), model.validation_dataloader())
