@@ -1,0 +1,29 @@
+# Older is from the July 2021 archive, newer is from the newer archive.
+newer_pgn = "1. e4 { [%eval 0.14] [%clk 0:05:00] } 1... c6 { [%eval 0.35] [%clk 0:05:00] } 2. Nf3 { [%eval 0.27] [%clk 0:04:59] } 2... d5 { [%eval 0.27] [%clk 0:05:00] } 3. exd5 { [%eval 0.13] [%clk 0:05:00] } 3... cxd5 { [%eval 0.12] [%clk 0:05:00] } 4. Ne5 { [%eval 0.0] [%clk 0:05:01] } 4... Nc6 { [%eval 0.07] [%clk 0:04:33] } 5. d4 { [%eval 0.03] [%clk 0:05:00] } 5... Bf5 { [%eval 0.32] [%clk 0:04:29] } 6. Bb5 { [%eval 0.22] [%clk 0:04:42] } 6... Bd7 { [%eval 0.32] [%clk 0:04:24] } 7. Nxd7 { [%eval 0.32] [%clk 0:04:41] } 7... Qxd7 { [%eval 0.41] [%clk 0:04:24] } 8. c3 { [%eval 0.34] [%clk 0:04:34] } 8... a6 { [%eval 0.43] [%clk 0:04:20] } 9. Bd3 { [%eval 0.44] [%clk 0:04:34] } 9... Nf6 { [%eval 0.43] [%clk 0:04:20] } 10. O-O { [%eval 0.44] [%clk 0:04:35] } 10... e6 { [%eval 0.53] [%clk 0:04:21] } 11. Nd2 { [%eval 0.4] [%clk 0:04:31] } 11... Bd6 { [%eval 0.43] [%clk 0:04:19] } 12. g3 { [%eval 0.28] [%clk 0:04:30] } 12... O-O { [%eval 0.28] [%clk 0:04:08] } 13. Re1 { [%eval 0.29] [%clk 0:04:23] } 13... e5 { [%eval 0.26] [%clk 0:03:38] } 14. dxe5 { [%eval 0.23] [%clk 0:04:19] } 14... Nxe5 { [%eval 0.29] [%clk 0:03:38] } 15. Bf1?! { [%eval -0.49] [%clk 0:04:14] } 15... Rfe8?! { [%eval -0.05] [%clk 0:03:21] } 16. Bg2?! { [%eval -0.12] [%clk 0:04:07] } 16... Bc5?! { [%eval 0.12] [%clk 0:03:12] } 17. Nf3? { [%eval -1.05] [%clk 0:03:25] } 17... Neg4? { [%eval -0.05] [%clk 0:02:39] } 18. Nd4? { [%eval 0.0] [%clk 0:03:10] } 18... Rxe1+? { [%eval 0.0] [%clk 0:02:03] } 19. Qxe1? { [%eval 0.0] [%clk 0:03:09] } 19... Re8? { [%eval 0.0] [%clk 0:02:05] } 20. Qd1? { [%eval -0.09] [%clk 0:03:02] } 20... Bxd4? { [%eval 0.14] [%clk 0:01:28] } 21. cxd4? { [%eval 0.11] [%clk 0:02:59] } 21... Qf5? { [%eval 0.07] [%clk 0:01:29] } 22. Qc2?? { [%eval #-6] [%clk 0:01:54] } 22... Qxc2?? { [%eval #-5] [%clk 0:01:24] } 0-1"
+older_pgn = "1. e4 { [%eval 0.24] [%clk 0:03:00] } 1... d5 { [%eval 0.43] [%clk 0:03:00] } 2. Nf3? { [%eval -0.95] [%clk 0:02:59] } 2... dxe4 { [%eval -0.95] [%clk 0:02:59] } 3. Ng5 { [%eval -0.9] [%clk 0:02:59] } 3... Nf6 { [%eval -0.72] [%clk 0:02:58] } 4. Bc4 { [%eval -0.48] [%clk 0:02:59] } 4... e6 { [%eval -0.48] [%clk 0:02:56] } 5. Nc3 { [%eval -0.46] [%clk 0:02:58] } 5... Nc6 { [%eval -0.4] [%clk 0:02:54] } 6. Ngxe4 { [%eval -0.7] [%clk 0:02:57] } 6... Nxe4 { [%eval -0.7] [%clk 0:02:53] } 7. Nxe4 { [%eval -0.95] [%clk 0:02:57] } 7... Qd4? { [%eval 0.51] [%clk 0:02:48] } 8. d3 { [%eval 0.24] [%clk 0:02:55] } 8... Ne5 { [%eval -0.02] [%clk 0:02:44] } 9. Be3 { [%eval -0.02] [%clk 0:02:53] } 9... Qd8? { [%eval 1.1] [%clk 0:02:33] } 10. Bb3 { [%eval 1.05] [%clk 0:02:52] } 10... Bd6 { [%eval 1.26] [%clk 0:02:29] } 11. O-O { [%eval 0.94] [%clk 0:02:51] } 11... O-O { [%eval 0.9] [%clk 0:02:28] } 12. f4 { [%eval 0.83] [%clk 0:02:50] } 12... Ng6 { [%eval 1.05] [%clk 0:02:24] } 13. Nxd6?! { [%eval 0.26] [%clk 0:02:45] } 13... cxd6 { [%eval 0.51] [%clk 0:02:23] } 14. Qf3 { [%eval 0.1] [%clk 0:02:38] } 14... d5? { [%eval 1.18] [%clk 0:02:21] } 15. Rad1 { [%eval 0.69] [%clk 0:02:36] } 15... a5 { [%eval 0.95] [%clk 0:02:18] } 16. a4 { [%eval 0.75] [%clk 0:02:34] } 16... Bd7 { [%eval 0.76] [%clk 0:02:16] } 17. Bd4 { [%eval 0.56] [%clk 0:02:30] } 17... Qe8? { [%eval 1.66] [%clk 0:02:12] } 18. Rfe1? { [%eval -0.46] [%clk 0:02:23] } 18... Bxa4 { [%eval -0.48] [%clk 0:02:10] } 19. Bxd5?? { [%eval -5.34] [%clk 0:02:22] } 19... Bxc2?? { [%eval -1.52] [%clk 0:02:03] } 20. Rd2 { [%eval -1.39] [%clk 0:02:21] } 20... Ba4? { [%eval 0.84] [%clk 0:01:27] } 21. f5? { [%eval -0.82] [%clk 0:02:19] } 21... Nh4 { [%eval -0.54] [%clk 0:01:17] } 22. Qg4 { [%eval -0.74] [%clk 0:02:19] } 22... Nxf5 { [%eval -0.9] [%clk 0:01:15] } 23. Rf1?? { [%eval -7.69] [%clk 0:02:16] } 23... Nxd4 { [%eval -7.37] [%clk 0:01:12] } 24. Qxd4 { [%eval -7.62] [%clk 0:02:15] } 24... exd5 { [%eval -7.54] [%clk 0:01:09] } 25. Rdf2 { [%eval -7.74] [%clk 0:02:06] } 25... Bc6 { [%eval -8.01] [%clk 0:01:06] } 26. Rf3 { [%eval -7.93] [%clk 0:02:04] } 26... Qe6 { [%eval -7.93] [%clk 0:00:58] } 27. Rg3 { [%eval -7.96] [%clk 0:02:03] } 27... g6 { [%eval -7.69] [%clk 0:00:54] } 28. Qf4 { [%eval -8.22] [%clk 0:02:00] } 28... f5 { [%eval -7.53] [%clk 0:00:50] } 29. Qh6 { [%eval -8.37] [%clk 0:01:59] } 29... Rf6 { [%eval -8.08] [%clk 0:00:48] } 30. h4 { [%eval -8.05] [%clk 0:01:55] } 30... Qf7 { [%eval -7.62] [%clk 0:00:42] } 31. h5 { [%eval -7.62] [%clk 0:01:53] } 31... Qg7 { [%eval -7.45] [%clk 0:00:41] } 32. Qf4 { [%eval -7.53] [%clk 0:01:51] } 32... Re8 { [%eval -7.59] [%clk 0:00:35] } 33. hxg6 { [%eval -8.16] [%clk 0:01:48] } 33... hxg6 { [%eval -7.82] [%clk 0:00:34] } 34. Rh3 { [%eval -8.37] [%clk 0:01:39] } 34... Rfe6 { [%eval -8.11] [%clk 0:00:31] } 35. Qh4 { [%eval -9.07] [%clk 0:01:37] } 35... d4 { [%eval -8.48] [%clk 0:00:24] } 36. Rhf3 { [%eval -9.94] [%clk 0:01:28] } 36... Bxf3 { [%eval -10.07] [%clk 0:00:21] } 37. gxf3 { [%eval -10.82] [%clk 0:01:27] } 37... Kf7 { [%eval -10.08] [%clk 0:00:15] } 38. Qg3 { [%eval -11.62] [%clk 0:01:26] } 38... Qe5 { [%eval -11.67] [%clk 0:00:12] } 39. Qg5 { [%eval -16.32] [%clk 0:01:22] } 39... Qe3+ { [%eval -11.92] [%clk 0:00:10] } 40. Kg2?! { [%eval #-2] [%clk 0:01:21] } 40... Qxg5+ { [%eval #-1] [%clk 0:00:08] } 41. Kf2 { [%eval #-1] [%clk 0:01:20] } 41... Re2# { [%clk 0:00:07] } 0-1"
+pgn_string = older_pgn
+
+import chess.pgn
+import io
+
+pgn = io.StringIO(pgn_string)
+
+# File reading option
+# pgn = open("pgn_sample.txt")
+game = chess.pgn.read_game(pgn)
+board = game.board()
+fen_list = []
+
+for node in game.mainline():
+    move = node.move
+    eval = node.eval()
+    if eval:
+       score = eval.white().score()
+       if score:
+           score = score/100.0
+
+    board.push(move)
+    fen_list.append((board.fen(), score))
+    
+for position in fen_list:
+  print(position)

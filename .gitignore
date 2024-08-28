@@ -2,10 +2,13 @@
 *.zst
 *.db
 
-#Log output
+# Log output
 lightning_logs/
 tensorboard-logs/
 wandb/
+
+# MacOS files
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
