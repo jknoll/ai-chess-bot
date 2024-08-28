@@ -28,8 +28,14 @@ class SplitEvaluationDataset(IterableDataset):
       bin = np.unpackbits(bin, axis=0).astype(np.single) 
       eval.eval = max(eval.eval, -15)
       eval.eval = min(eval.eval, 15)
-      ev = np.array([eval.eval]).astype(np.single) 
-      return {'binary':bin, 'eval':ev}    
+      ev = np.array([eval.eval]).astype(np.single)
+
+      # For testing mapping from FEN to bitboard
+      return {'idx': idx, 'fen': eval.fen, 'binary':bin, 'eval':ev}    
+
+      # Original return value
+      # return {'binary':bin, 'eval':ev}    
+      
 
 # Docs for training, validation, test split implementation
 # https://lightning.ai/docs/pytorch/stable/common/evaluation_basic.html
